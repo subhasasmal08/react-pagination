@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-const renderData = (data) => {
+const getData = (data) => {
   return (
     <ul>
-      {data.map((todo, index) => {
-        return <li key={index}>{todo.title}</li>;
+      {data.map((x, i) => {
+        return <li key={i}>{x.title}</li>;
       })}
     </ul>
   );
 };
 
-function PaginationComponent() {
+function Pagination() {
   const [data, setData] = useState([]);
 
   const [currentPage, setcurrentPage] = useState(1);
@@ -51,7 +51,7 @@ function PaginationComponent() {
   });
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos")
+    fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((json) => setData(json));
   }, []);
@@ -90,8 +90,7 @@ function PaginationComponent() {
 
   return (
     <>
-      <h1>Todo List</h1> <br />
-      {renderData(currentItems)}
+      {getData(currentItems)}
       <ul className="pageNumbers">
         <li>
           <button
@@ -114,11 +113,11 @@ function PaginationComponent() {
           </button>
         </li>
       </ul>
-      <button onClick={handleLoadMore} className="loadmore">
+      {/* <button onClick={handleLoadMore} className="loadmore">
         Load More
-      </button>
+      </button> */}
     </>
   );
 }
 
-export default PaginationComponent;
+export default Pagination;
